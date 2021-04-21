@@ -1,4 +1,4 @@
-package com.se.adproject;
+package com.adproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

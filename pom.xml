@@ -8,7 +8,7 @@
         <version>2.2.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.se</groupId>
+    <groupId>com</groupId>
     <artifactId>adproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>adproject</name>
@@ -48,8 +48,6 @@
             <artifactId>oracle-nosql-client</artifactId>
             <version>18.3.10</version>
         </dependency>
-
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
