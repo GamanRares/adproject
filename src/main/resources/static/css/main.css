@@ -1,0 +1,90 @@
+html * {
+    font-family: "Helvetica Neue", sans-serif;
+!important;
+}
+
+a * {
+    text-decoration: none;
+!important;
+}
+
+.default-cursor {
+    cursor: default;
+}
+
+.reportrange {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid rgb(144, 218, 258);
+}
+
+.fade {
+    transition: opacity 0.5s linear !important;
+}
+
+.overlay {
+    background-color: rgb(250, 250, 251);
+}
+
+.redText {
+    color: red;
+}
+
+ul {
+    list-style-type: none;
+}
+
+div a {
+    color: #212529;
+}
+
+th a {
+    color: black;
+}
+
+th a:hover {
+    color: black;
+}
+
+tr.selected {
+    background-color: rgb(222, 235, 255);
+}
+
+.pagination ul {
+    display: inline;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #f2f2f2;
+    border: 1px solid #404040;
+    border-radius: 3px;
+}
+
+.pagination a.deactivated {
+    color: #8c8c8c;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+    border-radius: 3px;
+}
+
+.pagination a.deactivated:hover {
+    color: #8c8c8c;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}

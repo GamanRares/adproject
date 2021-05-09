@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Content</title>
+</head>
+<body>
+    <!--/*@thymesVar id="sttttt" type="java.lang.String"*/-->
+    <div id="content" class="container-fluid" th:fragment="contentFragment(sttttt)">
+<!--        <div th:if="${sttttt} != null">-->
+<!--            <div class="row pt-2">-->
+<!--                <div class="col-1 text-center">-->
+<!--                    <img src="/icons/issue.png" width="64" height="64" class="d-inline-block align-top" alt="">-->
+<!--                </div>-->
+<!--                <div class="col-11 p-0">-->
+<!--                    <div class="row">-->
+<!--                            <ol class="breadcrumb m-0 pb-1 pt-1" style="background-color: rgb(220, 243, 254); !important;">-->
+<!--                                <li class="breadcrumb-item">-->
+<!--                                    <a th:href="${T(com.bubblebit.presentation.url.project.ProjectUrl).getProjectPage(issueDTO.getProjectName())}"-->
+<!--                                       th:text="${issueDTO.getProjectName()}">-->
+<!--                                        Project-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="breadcrumb-item">-->
+<!--                                    <a th:href="${T(com.bubblebit.presentation.url.issue.IssueUrl).getIssuePage(issueDTO.getName())}"-->
+<!--                                       th:text="${issueDTO.getName()}">-->
+<!--                                        Issue-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ol>-->
+<!--                    </div>-->
+<!--                    <div class="row pl-3" th:text="${issueDTO.getSummary()}">-->
+<!--                        Acesta este primul tau Support-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row pt-1">-->
+<!--                <div class="col">-->
+<!--                    &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--                    <a class="btn" href="#" role="button" data-toggle="modal" data-target="#editIssueModal">-->
+<!--                        <i class="fas fa-edit"></i>-->
+<!--                        Edit-->
+<!--                    </a>-->
+
+<!--                    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--                    <div id="editIssueModal" class="modal" data-backdrop="static" tabindex="-1" aria-labelledby="editIssueModalTitle" aria-hidden="true">-->
+<!--                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
+<!--                            <div class="modal-content modal-lg">-->
+<!--                                <div class="modal-header modal-lg">-->
+<!--                                    <h5 class="modal-title" id="editIssueModalTitle">-->
+<!--                                        Edit Issue :-->
+<!--                                        <span th:text="${issueDTO.getName()}"></span>-->
+<!--                                    </h5>-->
+<!--                                    <button type="button" class="close" onclick="hideEditIssueModal()" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <form id="editIssueForm" action="#" th:object="${issueMainEditor}" method="post">-->
+<!--                                    <fieldset>-->
+<!--                                        <div class="modal-body modal-lg">-->
+<!--                                            <input id="editIssueId" th:name="*{idFieldName}" th:default="${issueDTO.getId()}" th:value="${issueDTO.getId()}" type="hidden" class="form-control" readonly>-->
+<!--                                            <input id="editIssueName" th:name="*{nameFieldName}" th:default="${issueDTO.getName()}" th:value="${issueDTO.getName()}" type="hidden" class="form-control" readonly>-->
+<!--                                            <div id="editIssueAssigneeSelectpickerRow" class="row">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Assignee-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 dropdown">-->
+<!--                                                    <select id="editIssueAssigneeSelectpicker" th:name="*{assigneeEmailFieldName}" class="selectpicker show-tick" data-live-search="true" virtualScroll="100">-->
+<!--                                                        &lt;!&ndash;/*@thymesVar id="userIDEmailAndName" type="com.bubblebit.utils.types.Triplet<java.lang.Long, java.lang.String, java.lang.String>"*/&ndash;&gt;-->
+<!--                                                        <option th:each="userIDEmailAndName : ${allowedDisplayedUserIDsEmailAndName}"-->
+<!--                                                                th:value="${userIDEmailAndName.getB()}"-->
+<!--                                                                th:text="${userIDEmailAndName.getC()} + ' - ' + ${userIDEmailAndName.getB()}">-->
+<!--                                                        </option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueWatchersSelectpickerRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Watchers-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 dropdown">-->
+<!--                                                    <select id="editIssueWatchersSelectpicker" th:name="*{watcherEmailsFieldName}" class="selectpicker show-tick" data-live-search="true" virtualScroll="100" multiple>-->
+<!--                                                        &lt;!&ndash;/*@thymesVar id="userIDEmailAndName" type="com.bubblebit.utils.types.Triplet<java.lang.Long, java.lang.String, java.lang.String>"*/&ndash;&gt;-->
+<!--                                                        <option th:each="userIDEmailAndName : ${allowedDisplayedUserIDsEmailAndName}"-->
+<!--                                                                th:value="${userIDEmailAndName.getB()}"-->
+<!--                                                                th:text="${userIDEmailAndName.getC()} + ' - ' + ${userIDEmailAndName.getB()}">-->
+<!--                                                        </option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueSummaryRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Summary-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 input-group">-->
+<!--                                                    <input id="editIssueSummary" th:default="${issueDTO.getSummary()}" th:value="${issueDTO.getSummary()}" th:name="*{summaryFieldName}"-->
+<!--                                                           name="summary" type="text" class="form-control" maxlength="100">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueIssueTypeSelectpickerRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Type-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10">-->
+<!--                                                    <select id="editIssueIssueTypeSelectpicker" th:name="*{issueTypeFieldName}" class="selectpicker show-tick">-->
+<!--                                                        <option value="TASK" data-icon="fas fa-tasks">Task</option>-->
+<!--                                                        <option value="FEATURE" data-icon="fas fa-bug">Feature</option>-->
+<!--                                                        <option value="BUG" data-icon="fas fa-bug">Bug</option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssuePrioritySelectpickerRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Priority-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10">-->
+<!--                                                    <select id="editIssuePrioritySelectpicker" th:name="*{priorityFieldName}" class="selectpicker show-tick">-->
+<!--                                                        <option value="HIGH" data-icon="fas fa-minus-circle">High</option>-->
+<!--                                                        <option value="MEDIUM" data-icon="fas fa-bug">Medium</option>-->
+<!--                                                        <option value="LOW" data-icon="fas fa-tasks">Low</option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueStatusSelectpickerRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Status-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 input-group">-->
+<!--                                                    <select id="editIssueStatusSelectpicker" th:name="*{statusFieldName}" class="selectpicker show-tick">-->
+<!--                                                        <option value="NOT_OPEN">Not Open</option>-->
+<!--                                                        <option value="OPEN">Open</option>-->
+<!--                                                        <option value="IN_PROGRESS">In Progress</option>-->
+<!--                                                        <option value="TEST">Test</option>-->
+<!--                                                        <option value="REOPENED">Reopened</option>-->
+<!--                                                        <option value="RESOLVED">Resolved</option>-->
+<!--                                                        <option value="WAITING_FOR_INFO">Waiting for info</option>-->
+<!--                                                        <option value="CLOSED">Closed</option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueResolutionSelectpickerRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Resolution-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 input-group">-->
+<!--                                                    <select id="editIssueResolutionSelectpicker" th:name="*{issueResolutionFieldName}" class="selectpicker show-tick">-->
+<!--                                                        <option value="UNRESOLVED">Unresolved</option>-->
+<!--                                                        <option value="FIXED">Fixed</option>-->
+<!--                                                        <option value="WONT_FIX">Won't fix</option>-->
+<!--                                                        <option value="DUPLICATE">Duplicate</option>-->
+<!--                                                        <option value="CANT_REPRODUCE">Can't reproduce</option>-->
+<!--                                                        <option value="INCOMPLETE">Incomplete</option>-->
+<!--                                                        <option value="DONE">Done</option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div id="editIssueDescriptionRow" class="row pt-2">-->
+<!--                                                <div class="col-2 pt-1">-->
+<!--                                                    <span>-->
+<!--                                                        Description-->
+<!--                                                    </span>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-10 input-group">-->
+<!--                                                    <textarea id="editIssueDescription" th:default="${issueDTO.getDescription()}" th:text="${issueDTO.getDescription()}"-->
+<!--                                                              th:name="*{descriptionFieldName}" class="form-control" rows="10" maxlength="1000"></textarea>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </fieldset>-->
+<!--                                </form>-->
+<!--                                <div class="modal-footer modal-lg">-->
+<!--                                    <button type="button" class="btn btn-secondary" onclick="hideEditIssueModal()">Close</button>-->
+<!--                                    <button id="editIssueSubmitButton" onclick="editIssueForm()" type="submit" class="btn btn-primary">Save changes</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row pt-1">-->
+<!--                <div class="col-9">-->
+<!--                    <div class="row">-->
+<!--                        <a class="p-1" href="#detailsCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            Details-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="detailsCollapsible" class="row collapse multi-collapse show">-->
+<!--                        <div class="col-1">-->
+<!--                            <ul class="m-0 p-0">-->
+<!--                                <li>Type:</li>-->
+<!--                                <li>Priority:</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-3">-->
+<!--                            <ul class="mb-0 pb-0">-->
+<!--                                <li>-->
+<!--                                    <span th:switch="${issueDTO.getIssueType()}">-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.IssueType).BUG}" class="fas fa-bug"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.IssueType).FEATURE}" class="fas fa-bug"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.IssueType).TASK}" class="fas fa-tasks"></i>-->
+<!--                                    </span>-->
+<!--                                    <span th:text="${issueDTO.getIssueType()}">-->
+<!--                                        Issue Type-->
+<!--                                    </span>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                     <span th:switch="${issueDTO.getPriority()}">-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).HIGH}" class="fas fa-minus-circle"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).MEDIUM}" class="fas fa-bug"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).LOW}" class="fas fa-tasks"></i>-->
+<!--                                    </span>-->
+<!--                                    <span th:text="${issueDTO.getPriority()}">-->
+<!--                                        Issue Type-->
+<!--                                    </span>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-1">-->
+<!--                            <ul class="m-0 p-0">-->
+<!--                                <li>Status:</li>-->
+<!--                                <li>Resolution:</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-7">-->
+<!--                            <ul class="mb-0 pb-0">-->
+<!--                                <li th:text="${#strings.replace(issueDTO.getStatus(), '_', ' ')}">-->
+<!--                                    Issue Type-->
+<!--                                </li>-->
+<!--                                <li th:text="${#strings.replace(issueDTO.getIssueResolution(), '_', ' ')}">-->
+<!--                                    Issue Resolution-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt-2 pt-2">-->
+<!--                        <a class="p-1" href="#descriptionCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            Description-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="descriptionCollapsible" class="row collapse multi-collapse show mb-0 pb-0">-->
+<!--                        <div class="col mb-0 pb-0">-->
+<!--                            <pre style="font-family: 'Helvetica Neue', sans-serif; font-size: 1em; line-height: 1.2; font-weight: 400; white-space: pre-wrap;" th:utext="${#strings.replace(#strings.escapeXml(issueDTO.getDescription()),'&#10;','&lt;br&gt;')}">-->
+<!--                                Description-->
+<!--                            </pre>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt-2 pt-2">-->
+<!--                        <a class="p-1" href="#attachmentCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            Attachments-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="attachmentCollapsible" class="row collapse multi-collapse show">-->
+<!--                        <div class="col">-->
+<!--                            Attachments area.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt-2 pt-2">-->
+<!--                        <a class="p-1" href="#issueLinksCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            IssueLinks-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="issueLinksCollapsible" class="row collapse multi-collapse show mr-0 pr-0">-->
+<!--                        <div class="col-4 mr-0 pr-0">-->
+<!--                            <ul class="mb-0 pb-0 mr-0 pr-0">-->
+<!--                                &lt;!&ndash;/*@thymesVar id="linkedIssueNSPSC" type="java.util.Set<com.bubblebit.utils.types.Quintet<java.lang.String, java.lang.String, com.bubblebit.db.entity.enums.Priority, com.bubblebit.db.entity.enums.Status, java.time.LocalDateTime>>"*/&ndash;&gt;-->
+<!--                                <li th:each="linkedIssueNSPSC,iterStat : ${issueDTO.getLinkedIssueNSPSCs()}" style="border-bottom: 1px dotted black !important;">-->
+<!--                                    <a th:href="${T(com.bubblebit.presentation.url.issue.IssueUrl).getIssuePage(issueDTO.getLinkedIssueNSPSCs()[iterStat.index].getA())}"-->
+<!--                                       th:text="${linkedIssueNSPSC.getB()}" style="color: dodgerblue !important;">-->
+<!--                                        Linked Issue Summary-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-2 ml-0 pl-0 mr-0 pr-0">-->
+<!--                            <ul class="mb-0 pb-0 ml-0 pl-0 mr-0 pr-0">-->
+<!--                                &lt;!&ndash;/*@thymesVar id="linkedIssueSummary" type="java.util.Set<com.bubblebit.utils.types.Quintet<java.lang.String, java.lang.String, com.bubblebit.db.entity.enums.Priority, com.bubblebit.db.entity.enums.Status, java.time.LocalDateTime>>"*/&ndash;&gt;-->
+<!--                                <li th:each="linkedIssueSummary,iterStat : ${issueDTO.getLinkedIssueNSPSCs()}" style="border-bottom: 1px dotted black !important;">-->
+<!--                                    <span th:switch="${linkedIssueSummary.getC()}">-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).HIGH}" class="fas fa-minus-circle"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).MEDIUM}" class="fas fa-bug"></i>-->
+<!--                                        <i th:case="${T(com.bubblebit.db.entity.enums.Priority).LOW}" class="fas fa-tasks"></i>-->
+<!--                                    </span>-->
+<!--                                    <span th:text="${linkedIssueSummary.getC()}">-->
+<!--                                        Linked Issue Priority-->
+<!--                                    </span>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-2 ml-0 pl-0 mr-0 pr-0">-->
+<!--                            <ul class="mb-0 pb-0 ml-0 pl-0 mr-0 pr-0">-->
+<!--                                &lt;!&ndash;/*@thymesVar id="linkedIssueSummary" type="java.util.Set<com.bubblebit.utils.types.Quintet<java.lang.String, java.lang.String, com.bubblebit.db.entity.enums.Priority, com.bubblebit.db.entity.enums.Status, java.time.LocalDateTime>>"*/&ndash;&gt;-->
+<!--                                <li th:each="linkedIssueSummary,iterStat : ${issueDTO.getLinkedIssueNSPSCs()}" style="border-bottom: 1px dotted black !important;">-->
+<!--                                    <span th:text="${linkedIssueSummary.getD()}">-->
+<!--                                        Linked Issue Status-->
+<!--                                    </span>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-4 ml-0 pl-0">-->
+<!--                            <ul class="mb-0 pb-0 ml-0 pl-0">-->
+<!--                                &lt;!&ndash;/*@thymesVar id="linkedIssueSummary" type="java.util.Set<com.bubblebit.utils.types.Quintet<java.lang.String, java.lang.String, com.bubblebit.db.entity.enums.Priority, com.bubblebit.db.entity.enums.Status, java.time.LocalDateTime>>"*/&ndash;&gt;-->
+<!--                                <li th:each="linkedIssueSummary,iterStat : ${issueDTO.getLinkedIssueNSPSCs()}" style="border-bottom: 1px dotted black !important;">-->
+<!--                                    <span th:text="${T(com.bubblebit.utils.presentation.chrono.ChronoUtils).formatLocalDateTime(linkedIssueSummary.getE(),'yyyy-MM-dd HH:mm')}">-->
+<!--                                        Linked Issue Creation Time-->
+<!--                                    </span>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt-2 pt-2">-->
+<!--                        <a class="p-1" href="#activityCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            Activity-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="activityCollapsible" class="row collapse multi-collapse show">-->
+<!--                        <div class="col">-->
+<!--                            <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+<!--                                <li class="nav-item">-->
+<!--                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="true">Comments</a>-->
+<!--                                </li>-->
+<!--                                <li class="nav-item">-->
+<!--                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#github" role="tab" aria-controls="github" aria-selected="false">Github</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <div class="tab-content pt-2">-->
+<!--                                <div class="row pl-4 tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">-->
+<!--                                    &lt;!&ndash;/*@thymesVar id="commentDTO" type="com.bubblebit.db.dto.types.CommentDTO"*/&ndash;&gt;-->
+<!--                                    <div th:each="commentDTO,index : ${issueDTO.getCommentDTOs()}">-->
+<!--                                        <div class="row align-items-center">-->
+<!--                                            <a class="p-1" th:href="'#commentCollapsible' + ${index.index}" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" th:aria-controls="'commentCollapsible' + ${index.index}">-->
+<!--                                                <i class="far fa-caret-down"></i>-->
+<!--                                            </a>-->
+<!--                                            <a href="#"-->
+<!--                                               th:href="${T(com.bubblebit.presentation.url.user.UserUrl).getUserPage(commentDTO.getPublisherId())}"-->
+<!--                                               th:text="${commentDTO.getPublisherName()}">-->
+<!--                                                Publisher name-->
+<!--                                            </a>-->
+<!--                                            <span style="white-space: pre-wrap;" th:utext="' added a comment - ' + ${T(com.bubblebit.utils.presentation.chrono.ChronoUtils).formatLocalDateTime(commentDTO.getPublishedTime(),'yyyy-MM-dd HH:mm')}">-->
+<!--                                                Published time-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                        <div th:id="'commentCollapsible' + ${index.index}" class="row collapse multi-collapse show ml-1">-->
+<!--                                            <div class="col">-->
+<!--                                                <pre style="font-family: 'Helvetica Neue', sans-serif; font-size: 1em; line-height: 1.2; font-weight: 400; overflow: hidden; white-space: pre-wrap;" th:utext="${#strings.replace(#strings.escapeXml(commentDTO.getContent()),'&#10;','&lt;br&gt;')}">-->
+<!--                                                    Comment content-->
+<!--                                                </pre>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row">-->
+<!--                                        <button class="btn p-1" type="button" data-target="#addIssueCommentCollapsible" data-toggle="collapse" aria-expanded="false" aria-controls="addIssueCommentCollapsible">-->
+<!--                                            <i class="far fa-comment"></i>-->
+<!--                                            <span>Comment</span>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div id="addIssueCommentCollapsible" class="row multi-collapse collapse">-->
+<!--                                        <div class="col">-->
+<!--                                            <form id="addIssueCommentForm" action="#" th:object="${commentRegister}" method="post">-->
+<!--                                                <fieldset>-->
+<!--                                                    <input id="addIssueCommentPublisherEmail" th:name="*{publisherEmailFieldName}" th:default="${#authentication.getPrincipal().getUser().getEmail()}" th:value="${#authentication.getPrincipal().getUser().getEmail()}" type="hidden" class="form-control" readonly>-->
+<!--                                                    <input id="addIssueCommentIssueNameToComment" th:name="*{issueNameToCommentFieldName}" th:default="${issueDTO.getName()}" th:value="${issueDTO.getName()}" type="hidden" class="form-control" readonly>-->
+<!--                                                    <textarea id="addCommentContent" th:name="*{contentFieldName}" placeholder="Add a Comment" class="form-control" rows="3" maxlength="1000"></textarea>-->
+<!--                                                </fieldset>-->
+<!--                                            </form>-->
+<!--                                            <button id="addCommentButton" onclick="addComment()" type="submit" class="btn btn-primary">AddComment</button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="row pl-4 tab-pane fade" id="github" role="tabpanel" aria-labelledby="github-tab">-->
+<!--                                    <table class="table">-->
+<!--                                        <thead style="background-color: rgba(243, 243, 243, 0.3)">-->
+<!--                                        <tr>-->
+<!--                                            <th scope="col">-->
+<!--                                                Hash-->
+<!--                                            </th>-->
+<!--                                            <th scope="col">-->
+<!--                                                Commit Time-->
+<!--                                            </th>-->
+<!--                                            <th scope="col">-->
+<!--                                                User-->
+<!--                                            </th>-->
+<!--                                            <th scope="col">-->
+<!--                                                Message-->
+<!--                                            </th>-->
+<!--                                        </tr>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        &lt;!&ndash;/*@thymesVar id="commitDTO" type="com.bubblebit.db.dto.types.CommitDTO"*/&ndash;&gt;-->
+<!--                                        <tr th:each="commitDTO : ${issueDTO.getCommitDTOs()}">-->
+<!--                                            <td>-->
+<!--                                                <a href="" th:href="${commitDTO.getGithubURL()}" th:text="${commitDTO.getId()}">URL to Commit</a>-->
+<!--                                            </td>-->
+<!--                                            <td th:text="${T(com.bubblebit.utils.presentation.chrono.ChronoUtils).formatLocalDateTime(commitDTO.getCreationTime(),'yyyy-MM-dd HH:mm')}">0</td>-->
+<!--                                            <td>-->
+<!--                                                <a href="#"-->
+<!--                                                   th:href="${T(com.bubblebit.presentation.url.user.UserUrl).getUserPage(commitDTO.getPublisherId())}"-->
+<!--                                                   th:text="${commitDTO.getPublisherFullName()}">-->
+<!--                                                    Publisher name-->
+<!--                                                </a>-->
+<!--                                            </td>-->
+<!--                                            <td>-->
+<!--                                                <span th:text="${commitDTO.getMessage()}">Commit message</span>-->
+<!--                                                <table class="table">-->
+<!--                                                    <thead style="background-color: rgba(243, 243, 243, 0.3)">-->
+<!--                                                        <tr>-->
+<!--                                                            <th scope="col">-->
+<!--                                                                Files involved-->
+<!--                                                            </th>-->
+<!--                                                        </tr>-->
+<!--                                                    </thead>-->
+<!--                                                    <tbody>-->
+<!--                                                    &lt;!&ndash;/*@thymesVar id="fileHistoryDTO" type="com.bubblebit.db.dto.types.FileHistoryDTO"*/&ndash;&gt;-->
+<!--                                                        <tr th:each="fileHistoryDTO : ${commitDTO.getFileHistoryDTOs()}">-->
+<!--                                                            <td>-->
+<!--                                                                <a href="" th:href="${fileHistoryDTO.getGithubURL()}" th:text="${fileHistoryDTO.getPath()}">URL to Commit</a>-->
+<!--                                                            </td>-->
+<!--                                                        </tr>-->
+<!--                                                    </tbody>-->
+<!--                                                </table>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-3">-->
+<!--                    <div class="row">-->
+<!--                        <a class="p-1" href="#peopleCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="peopleCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            People-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="peopleCollapsible" class="row collapse multi-collapse show">-->
+<!--                        <div class="col-2">-->
+<!--                            <ul class="m-0 p-0">-->
+<!--                                <li>Assignee:</li>-->
+<!--                                <li>Reporter:</li>-->
+<!--                                <li>Watchers:</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-10">-->
+<!--                            <ul class="mb-0 pb-0">-->
+<!--                                <li>-->
+<!--                                    <a href="#"-->
+<!--                                       th:href="${T(com.bubblebit.presentation.url.user.UserUrl).getUserPage(issueDTO.getAssigneeId())}"-->
+<!--                                       th:text="${issueDTO.getAssigneeFullName()}">-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <a href="#"-->
+<!--                                       th:href="${T(com.bubblebit.presentation.url.user.UserUrl).getUserPage(issueDTO.getReporterId())}"-->
+<!--                                       th:text="${issueDTO.getReporterFullName()}">-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li class="text-truncate" onclick="toggleEllipsis(this)">-->
+<!--                                    <a th:each="watcherID, iterStat : ${issueDTO.getWatcherIDs()}"-->
+<!--                                       href="#"-->
+<!--                                       th:href="${T(com.bubblebit.presentation.url.user.UserUrl).getUserPage(watcherID)}">-->
+<!--                                        <span th:text="${issueDTO.getWatcherFullNames()[iterStat.index]} + (${!iterStat.last} ? ', ' : '')">,</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row mt-2 pt-2">-->
+<!--                        <a class="p-1" href="#datesCollapsible" onclick="toggleCollapsible(this)" data-toggle="collapse" aria-expanded="false" aria-controls="datesCollapsible">-->
+<!--                            <i class="far fa-caret-square-down"></i>-->
+<!--                            Dates-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    <div id="datesCollapsible" class="row collapse multi-collapse show">-->
+<!--                        <div class="col-2">-->
+<!--                            <ul class="m-0 p-0">-->
+<!--                                <li>Created:</li>-->
+<!--                                <li>Updated:</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                        <div class="col-10">-->
+<!--                            <ul class="mb-0 pb-0">-->
+<!--                                <li th:text="${T(com.bubblebit.utils.presentation.chrono.ChronoUtils).formatLocalDateTime(issueDTO.getCreationTime(),'yyyy-MM-dd HH:mm')}">-->
+<!--                                    Creation time-->
+<!--                                </li>-->
+<!--                                <li th:text="${T(com.bubblebit.utils.presentation.chrono.ChronoUtils).formatLocalDateTime(issueDTO.getModificationTime(),'yyyy-MM-dd HH:mm')}">-->
+<!--                                    Updated time-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div th:unless="${sttttt} != null">
+            Please select from the table.
+        </div>
+    </div>
+</body>
+</html>

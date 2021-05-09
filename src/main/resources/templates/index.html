@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="fragments/head :: head(~{::meta},~{::title},~{::links},~{::scripts})">
+    <title>DB Project</title>
+</head>
+<body style="background-color: rgba(122, 219, 255, 0.3); height: 100vh !important;">
+    <div class="container-fluid" style="height: calc( 100% - 62px );">
+        <div id="issuesContent" class="row" style="height: calc( 100% - 40px );">
+            <div class="col-4 p-0 m-0 h-100">
+                <div class="row p-0 m-0" style="max-height: calc( 100% - 100px );">
+                    <div id="table-wrapper" class="col-12 bg-light p-0 overflow-auto pb-0 mb-0" style="border-right: 2px solid #0275d8 !important; border-bottom: 2px solid #0275d8 !important;">
+                        <div class="table-responsive pb-0 mb-0">
+                            <table class="table table-hover pb-0 mb-0">
+                                <thead style="background-color: rgba(122, 219, 255, 0.3)">
+                                <tr>
+                                    <th scope="col">
+                                        Name
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr><tr>
+                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 p-0 overflow-auto">
+                <div th:replace="content :: contentFragment(null)">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
