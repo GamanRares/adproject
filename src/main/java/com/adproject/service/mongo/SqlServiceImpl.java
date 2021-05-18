@@ -54,7 +54,9 @@ public class SqlServiceImpl {
 
     //7. The oldest teacher from a country
     public ExecutionTime executeQueryNo7() {
-        String query = "";
+        String query = "select t.id oldest, max(t.age) age from country c, city ct, address a, faculty f, faculty_teacher ft, teacher t " +
+                "where c.name ='G33' and c.id = ct.country_id and ct.id = a.city_id and a.id = f.address_id " +
+                "and f.id = ft.faculty_id and ft.teacher_id = t.id group by t.id";
         return timeOf(query);
     }
 
@@ -77,7 +79,12 @@ public class SqlServiceImpl {
 
     //10. The students from a given country, studying a course with the least number of credits of that teacher
     public ExecutionTime executeQueryNo10() {
-        String query = "";
+        String query = "select * from country c, city ct, address a, faculty f, faculty_teacher ft, teacher t, subject_teacher st, subject sss , " +
+                "(select subject.id lala, min(subject.credits) from country c, city ct, address a, faculty f, faculty_teacher ft, teacher t, subject_teacher st, subject " +
+                "where t.id= 5 and c.id = ct.country_id and ct.id = a.city_id and a.id = f.address_id " +
+                "and f.id = ft.faculty_id and ft.teacher_id = t.id and st.teacher_id = t.id and st.subject_id = subject.id) dummy " +
+                "where  c.id = 1 and c.id = ct.country_id and ct.id = a.city_id and a.id = f.address_id " +
+                "and f.id = ft.faculty_id and ft.teacher_id = t.id and st.teacher_id = t.id and st.subject_id = sss.id and sss.id = dummy.lala";
         return timeOf(query);
     }
 
@@ -97,6 +104,6 @@ public class SqlServiceImpl {
         int endPos = result.indexOf("..");
         String parsed = result.substring(startPos, endPos);
         double time = Double.parseDouble(parsed);
-        return (time > 0.0d) ? time * 10: time * 1000;
+        return (time > 1d) ? time * 10: time * 1000;
     }
 }
