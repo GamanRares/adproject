@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.toSet;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Service
-public class MongoServiceImpl {
+public class MongoServiceImpl implements com.adproject.service.Service {
     @Autowired  MongoClient mongoClient;
     @Autowired  MongoTemplate mongoTemplate;
     MongoDatabase mongoDB;

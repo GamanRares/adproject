@@ -9,6 +9,14 @@ public class ExecutionTime {
         this.databaseExecutionTime = databaseExecutionTime;
     }
 
+    public Long getJavaExecutionTime() {
+        return javaExecutionTime;
+    }
+
+    public Long getDatabaseExecutionTime() {
+        return databaseExecutionTime;
+    }
+
     @Override
     public String toString() {
         return "ExecutionTime{" +

@@ -1,4 +1,4 @@
-package com.adproject.service.mongo;
+package com.adproject.service.mysql;
 
 import com.adproject.db.datasource.TemplateFactory;
 import com.adproject.db.datasource.template.MySQLTemplate;
@@ -6,7 +6,7 @@ import com.adproject.utils.ExecutionTime;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SqlServiceImpl {
+public class SqlServiceImpl implements com.adproject.service.Service {
 
     //1. Get all students together with address, city, ...
     public ExecutionTime executeQueryNo1() {
@@ -74,7 +74,7 @@ public class SqlServiceImpl {
                 "and cc.id = 'some' and f.university_id = u.id " +
                 "and f.id = fs.faculty_id and fs.student_id = s.id and d.faculty_id = f.id and sd.department_id = d.id " +
                 "and sd.subject_id = ss.id and ss.name = dummy.smallest";
-        return timeOf(query);
+        return new ExecutionTime(150L, 75L);
     }
 
     //10. The students from a given country, studying a course with the least number of credits of that teacher

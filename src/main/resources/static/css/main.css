@@ -57,34 +57,24 @@ tr.selected {
     background-color: rgb(222, 235, 255);
 }
 
-.pagination ul {
-    display: inline;
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    align-content: center;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
 }
 
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
 }
 
-.pagination a.active {
-    background-color: #f2f2f2;
-    border: 1px solid #404040;
-    border-radius: 3px;
-}
-
-.pagination a.deactivated {
-    color: #8c8c8c;
-}
-
-.pagination a:hover {
-    background-color: #ddd;
-    border-radius: 3px;
-}
-
-.pagination a.deactivated:hover {
-    color: #8c8c8c;
-    background-color: transparent !important;
-    border-radius: 0 !important;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

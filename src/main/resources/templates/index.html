@@ -20,22 +20,36 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
-                                </tr><tr>
-                                    <td th:id="IssuesTableNameTd" th:text="test1">0</td>
+                                <tr th:onclick="executeBenchmark(1)"
+                                    th:class="${selectedNumber == 1} ? 'selected' : _">
+                                    <td th:id="IssuesTableNameTd1">1. Get all information about a given student together with city and country</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(2)">
+                                    <td th:id="IssuesTableNameTd2">2. Get all teachers of a given student</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(3)">
+                                    <td th:id="IssuesTableNameTd3">3. Get all students from a given city having a given teacher</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(4)">
+                                    <td th:id="IssuesTableNameTd4">4. Find which department from a given faculty has the most credits</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(5)">
+                                    <td th:id="IssuesTableNameTd5">5. Find the university with the largest number of students</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(6)">
+                                    <td th:id="IssuesTableNameTd6">6. Find the university with the largest number of students at a course</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(7)">
+                                    <td th:id="IssuesTableNameTd7">7. Find the oldest teacher from a given country</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(8)">
+                                    <td th:id="IssuesTableNameTd8">8. Find the faculty with the highest student age mean</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(9)">
+                                    <td th:id="IssuesTableNameTd9">9. Find all the students from a given country, studying a course with the least number of credits of that teacher</td>
+                                </tr>
+                                <tr th:onclick="executeBenchmark(10)">
+                                    <td th:id="IssuesTableNameTd10">10. Find the faculty with the least number of departments, but with the most students</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -48,6 +62,52 @@
                 </div>
             </div>
         </div>
+        <script>
+            /*<![CDATA[*/
+
+            function executeBenchmark(id) {
+                var urlToCall = '[[${T(com.adproject.presentation.url.benchmark.BenchmarkUrl).BENCKMARK_URL}]]' + '/' + id;
+                var commentAddedToaster =
+                    '<div id="spinner" class="loader">\n' +
+                    '</div>';
+                $('#content').append(commentAddedToaster);
+                $.ajax({
+                    url: urlToCall,
+                    method: 'GET',
+                    success: function (result, textStatus, jQxhr) {
+                        if (jQxhr.status === 200) {
+                            $('#content').replaceWith(result);
+                        }
+                    },
+                    error(jqXHR, textStatus, errorThrown) {
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                resetEditIssueFormSetectpickers();
+                $('#editIssueAssigneeSelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+                $('#editIssueWatchersSelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+                $('#editIssuePrioritySelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+                $('#editIssueStatusSelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+                $('#editIssueResolutionSelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+                $('#editIssueIssueTypeSelectpicker').on('change', function () {
+                    orderSelectpicker($(this));
+                });
+            })
+
+            /*]]>*/
+        </script>
     </div>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
